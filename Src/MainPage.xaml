@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="KeyStoreEncryption.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:KeyStoreEncryption.ViewModels"
+    x:DataType="vm:MainPageViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="Padding" Value="4" />
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="HeightRequest" Value="90" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="15">
+            <!--  Public Key  -->
+            <VerticalStackLayout>
+                <Label Text="Public Key" />
+                <Border>
+                    <Editor Text="{Binding PublicKey}" />
+                </Border>
+            </VerticalStackLayout>
+            <!--  Genarate Key Command  -->
+            <Button Command="{Binding GenaratePublicKeyCommand}" Text="Genarate Public Key" />
+            <!--  Encrypted AES Key  -->
+            <VerticalStackLayout>
+                <Label Text="AES key (encrypted with public key)" />
+                <Border>
+                    <Editor Text="{Binding AesKey, Mode=OneWayToSource}" />
+                </Border>
+            </VerticalStackLayout>
+            <!--  Encrypted AES Message  -->
+            <VerticalStackLayout>
+                <Label Text="Message (encrypted with AES key)" />
+                <Border>
+                    <Editor Text="{Binding EncrypedMessage, Mode=OneWayToSource}" />
+                </Border>
+            </VerticalStackLayout>
+            <!--  Decrypt Command  -->
+            <Button Command="{Binding DecryptMessageCommand}" Text="Decrypt" />
+            <!--  Output Text  -->
+            <Label Text="Output:" />
+            <Label FontSize="Large" Text="{Binding PlainText}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
